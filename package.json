@@ -1,0 +1,29 @@
+{
+  "name": "job-finder",
+  "version": "1.0.0",
+  "description": "job works",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosueFernandes7/jobFinder.git"
+  },
+  "author": "Josué Fernandes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JosueFernandes7/jobFinder/issues"
+  },
+  "homepage": "https://github.com/JosueFernandes7/jobFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
