@@ -5,6 +5,8 @@ const path = require('path')
 const db = require('./db/connection')
 const bodyParser = require('body-parser')
 const Job = require('./models/Job')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const PORT = 3000
 
@@ -16,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // handle bars
 app.set('views', path.join(__dirname, 'views'))
-app.engine('handlebars',exphbs({defaultLayout: 'main'}))
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 // static folder
@@ -31,12 +33,32 @@ db.authenticate()
 
 // Routes
 app.get('/', (req, res) => {
-  Job.findAll({order: [
-    ['createdAt','ASC']
-  ]})
-  .then(jobs => {
-    res.render('index',{jobs})
-  })
+
+  let search = req.query.job;
+  let query = `%${search}%` // se digitar ph ele vai pegar o php
+
+  if (!search) {
+    Job.findAll({
+      order: [
+        ['createdAt', 'ASC']
+      ]
+    })
+      .then(jobs => {
+        res.render('index', { jobs })
+      })
+      .catch(err => console.log(err))
+  } else {
+    Job.findAll({
+      where: { title: { [Op.like]: query } }, // verifica se a palavra do search tem no titulo do banco
+      order: [
+        ['createdAt', 'ASC']
+      ]
+    })
+      .then(jobs => {
+        res.render('index', { jobs })
+      })
+      .catch(err => console.log(err))
+  }
 })
 
 // cria a rota jobs
