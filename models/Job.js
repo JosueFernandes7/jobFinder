@@ -23,10 +23,7 @@ const Job = db.define('job', {
   updatedAt: {
     type: Sequelize.STRING
   },
-  new: {
-    type: Sequelize.INTEGER
-  },
-  id: {
+  new_job: {
     type: Sequelize.INTEGER
   }
 })
