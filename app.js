@@ -19,7 +19,7 @@ db.authenticate()
 })
 // Routes
 app.get('/',(req,res) => {
-  res.send("Servidor Iniciado com Sucesso 1")
+  res.send("Está funcionando")
 })
 
 // cria a rota jobs
